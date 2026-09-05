@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #ffffff; overflow: hidden; }
+  a { color: #a83a32; text-decoration: none; }
+  a:hover { color: #7d2a24; text-decoration: underline; }
+  #dc-fit { width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+  #dc-canvas { flex: none; transform-origin: center center; }
+</style>
+</head>
+<body>
+<div id="dc-fit"><div id="dc-canvas"></div></div>
+
+<script>
+function renderVals(props) {
+    const natColor = props.naturalColor ?? '#3a4a5c';
+    const faithColor = props.faithColor ?? '#a83a32';
+    const showRoutes = props.showRoutes ?? true;
+    const X0 = 540, PITCH = 282, W = 234, TOP = 170, VGAP = 32;
+    const FOLD = 12, ROWGAP = 76;
+
+    const n = (label, locus, route, book, children, extra) =>
+      Object.assign({ label, locus, route, book, children: children || [], faith: false }, extra || {});
+    const fa = (label, locus, book, children, extra) =>
+      Object.assign({ label, locus, route: 'faith alone', book, children: children || [], faith: true }, extra || {});
+    const mx = (label, locus, route, book, children, extra) =>
+      Object.assign({ label, locus, route, book, children: children || [], faith: false, mixed: true }, extra || {});
+
+    const leafNoPotency = n('No passive potency; incorporeal', 'SCG I.16, I.20', 'remotio', 1);
+    const leafImmutable = n('Immutable', 'SCG I.13-15 (ST I q.9)', 'remotio', 1, [], { id: 'immutable', crosslink: 'eternal' });
+    const leafOmnipresent = n('Omnipresent', 'ST I q.8 - no dedicated SCG locus', 'causalitas', 1);
+    const leafDivineIdeas = n('Divine ideas', 'SCG I.51-54 (ST I q.15)', 'eminentia', 1);
+    const leafFalsity = n('Falsity is not in God', 'ST I q.17', 'remotio', 1);
+    const leafTrue = n('True', 'SCG I.59-62 (ST I q.16)', 'eminentia', 1, [leafFalsity]);
+    const leafImpassible = n('Impassible', 'SCG I.89 (ST I q.20 a.1 ad 1)', 'remotio', 1);
+    const leafJustMerciful = n('Just and merciful', 'SCG I.92-93 (ST I q.21)', 'eminentia', 1);
+    const leafWorldBegan = fa('That the world began in time', 'SCG II.31-38 (ST I q.46 a.2)', 2, [], { interrupt: true });
+    const leafBeatificAttained = fa('The beatific vision as actually attained', 'SCG III.51-63 (ST I q.12 a.4)', 3, [], { id: 'beatificAttained', interrupt: true });
+    const leafOriginalSin = fa('Original sin', 'SCG IV.50-55', 4, []);
+
+    const bookIV = fa('The Trinity - three persons, one essence', 'SCG IV.2-26 (ST I qq.27-43, esp. q.32 a.1)', 4, [
+      fa('The Incarnation', 'SCG IV.27-49 (ST III q.1)', 4, [
+        leafOriginalSin,
+        fa('The sacraments', 'SCG IV.56-78 (ST III & Suppl.)', 4, [
+          fa('Resurrection and last things', 'SCG IV.79-97 (ST Suppl.)', 4, [])
+        ])
+      ])
+    ]);
+    bookIV.route = 'faith alone - proofs harm faith';
+
+    const predestination = fa('Predestination to a supernatural end; the book of life', 'SCG III.161-163 (ST I qq.23-24)', 3, [bookIV], { interrupt: true });
+    const grace = mx('Grace - necessity for the supernatural end', 'SCG III.147-163 (ST I-II q.109ff)', 'causalitas - argued, yet gift not proof', 3, [predestination]);
+    const provident = n('Provident', 'SCG III.64-76 (ST I q.22)', 'causalitas', 3, [grace]);
+    const godAsEnd = n('God as the end of all things', 'SCG III.1-48, esp. III.25-48 (ST I-II q.3 a.8)', 'causalitas + eminentia', 3, [provident, leafBeatificAttained],
+      { id: 'godAsEnd', caption: { to: 'beatificAttained', text: 'reason names the end; grace grants the arrival' } });
+    const creator = n('Creator ex nihilo', 'SCG II.15-16 (ST I qq.44-45)', 'causalitas', 2, [godAsEnd, leafWorldBegan]);
+    const omnipotent = n('Omnipotent / divine power', 'SCG II.7-10, II.22 (ST I q.25)', 'eminentia', 2, [creator]);
+    const beatitude = n('Beatitude - God’s own blessedness', 'SCG I.100-102 (ST I q.26)', 'eminentia', 1, [omnipotent]);
+    const living = n('Living', 'SCG I.97-99 (ST I q.18)', 'eminentia', 1, [beatitude]);
+    const love = n('Love', 'SCG I.89-91 (ST I q.20)', 'eminentia', 1, [living, leafImpassible, leafJustMerciful]);
+    const wills = n('Wills - and freely, in creating', 'SCG I.72-88 (ST I q.19)', 'eminentia', 1, [love]);
+    const omniscient = n('Omniscient - singulars, future contingents', 'SCG I.44-71, esp. I.66-67 (ST I q.14)', 'eminentia', 1, [wills, leafDivineIdeas, leafTrue]);
+    const infinite = n('Infinite', 'SCG I.43 (ST I q.7)', 'remotio', 1, [omniscient, leafOmnipresent]);
+    const one = n('One', 'SCG I.42 (ST I q.11)', 'remotio', 1, [infinite]);
+    const good = n('Good', 'SCG I.37-41 (ST I qq.5-6)', 'eminentia', 1, [one]);
+    const divineNames = n('The divine names - analogy', 'SCG I.29-36 (ST I q.13)', 'triplex via', 1, [good], { hinge: true });
+    const perfect = n('Perfect', 'SCG I.28 (ST I q.4)', 'eminentia', 1, [divineNames]);
+    const simple = n('Simple - essence is esse', 'SCG I.16-27 (ST I q.3)', 'remotio', 1, [perfect, leafNoPotency, leafImmutable]);
+    const eternal = n('Eternal', 'SCG I.15 (ST I q.10)', 'remotio', 1, [simple], { id: 'eternal' });
+    const root = n('God exists', 'SCG I.13 (ST I q.2 a.3)', 'causalitas', 1, [eternal]);
+
+    const lines = (str, per) => Math.max(1, Math.ceil(str.length / per));
+    const boxH = (item) => {
+      const labelLines = lines(item.label, 15);
+      const locusLines = lines(item.locus, 25);
+      const routeLines = showRoutes && item.route ? lines(item.route, 25) : 0;
+      return 24 + labelLines * 30 + 8 + locusLines * 17 + (routeLines ? routeLines * 17 + 2 : 0) + 14;
+    };
+
+    const nodes = [];
+    const idIndex = {};
+    let cursor = TOP;
+    const add = (item, depth, parentIdx) => {
+      const h = boxH(item);
+      const idx = nodes.length;
+      const isInterrupt = !!item.interrupt;
+      const isMixed = !!item.mixed;
+      const color = item.faith ? faithColor : natColor;
+      nodes.push({
+        label: item.label, locus: item.locus,
+        route: showRoutes ? item.route : '',
+        depth, parent: parentIdx, faith: !!item.faith, book: item.book, h, y: 0,
+        color,
+        subColor: item.faith ? '#c08a83' : '#9c958a',
+        routeColor: item.faith ? faithColor : (isMixed ? faithColor : '#6f6a62'),
+        bg: item.faith ? '#fbeeec' : (isMixed ? '#f5e9e6' : '#ffffff'),
+        borderWidth: item.hinge ? 3 : (isInterrupt ? 2.5 : 2),
+        borderStyle: isInterrupt ? 'dashed' : 'solid',
+        shadow: item.hinge ? '0 0 0 5px rgba(36,33,30,0.10)' : 'none'
+      });
+      if (item.id) idIndex[item.id] = idx;
+      if (!item.children.length) {
+        nodes[idx].y = cursor + h / 2;
+        cursor += h + VGAP;
+      } else {
+        const kids = item.children.map((c) => add(c, depth + 1, idx));
+        const first = nodes[kids[0]], last = nodes[kids[kids.length - 1]];
+        nodes[idx].y = (first.y + last.y) / 2;
+      }
+      if (item.crosslink) nodes[idx].crosslink = item.crosslink;
+      if (item.caption) nodes[idx].captionTo = item.caption;
+      return idx;
+    };
+    const rootIdx = add(root, 0, -1);
+
+    // vertical nudge per depth-column, before the row split
+    const byCol = {};
+    nodes.forEach((N, i) => { (byCol[N.depth] = byCol[N.depth] || []).push(i); });
+    Object.keys(byCol).forEach((k) => {
+      const col = byCol[k].slice().sort((a, b) => nodes[a].y - nodes[b].y);
+      for (let i = 1; i < col.length; i++) {
+        const A = nodes[col[i - 1]], B = nodes[col[i]];
+        const need = (A.h + B.h) / 2 + 22;
+        if (B.y - A.y < need) B.y = A.y + need;
+      }
+    });
+
+    // the spine folds back at FOLD: row 1 (depth < FOLD) runs left-to-right;
+    // row 2 (depth >= FOLD, Books II-IV) runs right-to-left directly beneath it,
+    // so the diagram folds in instead of growing ever wider.
+    const xOf = (depth) => depth < FOLD ? X0 + depth * PITCH : X0 + (2 * FOLD - 1 - depth) * PITCH;
+    const row1 = nodes.filter((N) => N.depth < FOLD);
+    const row2 = nodes.filter((N) => N.depth >= FOLD);
+    const row1Bottom = Math.max.apply(null, row1.map((N) => N.y + N.h / 2));
+    const row2MinRaw = Math.min.apply(null, row2.map((N) => N.y - N.h / 2));
+    const rowShift = (row1Bottom + ROWGAP) - row2MinRaw;
+    row2.forEach((N) => { N.y += rowShift; });
+
+    nodes.forEach((N) => { N.x = xOf(N.depth); N.lx = N.x; N.ly = N.y - N.h / 2; });
+
+    const root0 = nodes[rootIdx];
+    const emblemR = 200;
+    const emblemCx = 300, emblemCy = root0.y;
+    const links = [];
+    nodes.forEach((N) => {
+      if (N.parent < 0) {
+        const x2 = N.x;
+        const dy = N.y - emblemCy;
+        const sx = emblemCx + Math.sqrt(Math.max(0, emblemR * emblemR - Math.min(dy * dy, emblemR * emblemR - 1)));
+        const mxp = (sx + x2) / 2, r = Math.min(26, Math.abs(dy) / 2), dir = dy > 0 ? 1 : -1;
+        const d = Math.abs(dy) < 2
+          ? `M ${sx} ${emblemCy} L ${x2} ${N.y}`
+          : `M ${sx} ${emblemCy} L ${mxp - r} ${emblemCy} Q ${mxp} ${emblemCy} ${mxp} ${emblemCy + dir * r} L ${mxp} ${N.y - dir * r} Q ${mxp} ${N.y} ${mxp + r} ${N.y} L ${x2} ${N.y}`;
+        links.push({ d, stroke: N.faith ? faithColor : natColor, w: 2.8, dash: N.faith ? '9 9' : 'none', op: 0.5 });
+        return;
+      }
+      const P = nodes[N.parent];
+      const dir = N.y > P.y ? 1 : -1;
+      let d;
+      if (Math.abs(N.x - P.x) < 1) {
+        // the fold: parent and child share a column, so run the vertical
+        // leg in the empty gutter to the right instead of through the boxes
+        const gx = P.x + W + 30, r = Math.min(22, Math.abs(N.y - P.y) / 2);
+        d = `M ${P.x + W} ${P.y} L ${gx - r} ${P.y} Q ${gx} ${P.y} ${gx} ${P.y + dir * r} L ${gx} ${N.y - dir * r} Q ${gx} ${N.y} ${gx - r} ${N.y} L ${N.x + W} ${N.y}`;
+      } else {
+        const hx = N.x >= P.x ? 1 : -1;
+        const x1 = hx > 0 ? P.x + W : P.x;
+        const x2 = hx > 0 ? N.x : N.x + W;
+        const mxp = (x1 + x2) / 2, r = Math.min(18, Math.abs(N.y - P.y) / 2, Math.abs(x2 - x1) / 2);
+        d = Math.abs(N.y - P.y) < 2
+          ? `M ${x1} ${P.y} L ${x2} ${N.y}`
+          : `M ${x1} ${P.y} L ${mxp - hx * r} ${P.y} Q ${mxp} ${P.y} ${mxp} ${P.y + dir * r} L ${mxp} ${N.y - dir * r} Q ${mxp} ${N.y} ${mxp + hx * r} ${N.y} L ${x2} ${N.y}`;
+      }
+      links.push({ d, stroke: N.faith ? faithColor : natColor, w: N.faith ? 2.2 : 2.6, dash: N.faith ? '9 9' : 'none', op: N.faith ? 0.7 : 0.5 });
+    });
+
+    const captions = [];
+    nodes.forEach((N) => {
+      if (N.crosslink && idIndex[N.crosslink] !== undefined) {
+        const T = nodes[idIndex[N.crosslink]];
+        const cgx = T.x + W + (PITCH - W) / 2 + 8;
+        links.push({ d: `M ${N.x} ${N.y} L ${cgx} ${N.y} L ${cgx} ${T.y} L ${T.x + W} ${T.y}`, stroke: '#6f6a62', w: 1.3, dash: '2 5', op: 0.45 });
+      }
+      if (N.captionTo && idIndex[N.captionTo.to] !== undefined) {
+        const T = nodes[idIndex[N.captionTo.to]];
+        captions.push({ x: T.x + 2, y: T.y + T.h / 2 + 12, text: N.captionTo.text });
+      }
+    });
+
+    const maxDepth = Math.max.apply(null, nodes.map((N) => N.depth));
+    const row1Top = Math.min.apply(null, row1.map((N) => N.y - N.h / 2)) - 20;
+    const row1H = row1Bottom + 30 - row1Top;
+    const row2Top = row1Bottom + ROWGAP / 2;
+    const diagramBottom = Math.max.apply(null, row2.map((N) => N.y + N.h / 2)) + 30;
+    const row2H = diagramBottom - row2Top;
+
+    const ticks = [];
+    for (let d = 0; d < FOLD; d++) ticks.push({ x: X0 + d * PITCH - 21, y1: row1Top, y2: row1Bottom + 30 });
+    for (let d = FOLD; d <= maxDepth; d++) ticks.push({ x: xOf(d) - 21, y1: row2Top, y2: diagramBottom });
+
+    const b1 = xOf(12.5), b2 = xOf(14.5), b3 = xOf(18.5), b4 = xOf(maxDepth + 0.5) - 20;
+    const bands = [
+      { x: Math.min(b1, b2), w: Math.abs(b1 - b2), fill: 'rgba(120,110,90,0.05)', y: row2Top, h: row2H },
+      { x: Math.min(b2, b3), w: Math.abs(b2 - b3), fill: 'rgba(160,90,70,0.06)', y: row2Top, h: row2H },
+      { x: Math.min(b3, b4), w: Math.abs(b3 - b4), fill: 'rgba(168,58,50,0.09)', y: row2Top, h: row2H }
+    ];
+    const bandLabels = [
+      { x: Math.min(b1, b2) + 8, y: row2Top + 6, text: 'Book II - De Creatione' },
+      { x: Math.min(b2, b3) + 8, y: row2Top + 6, text: 'Book III - De Providentia' },
+      { x: Math.min(b3, b4) + 8, y: row2Top + 6, text: 'Book IV - De Salute' }
+    ];
+
+    const canvasW = X0 + FOLD * PITCH + 80;
+    const legendTop = diagramBottom + 40;
+    const legendW = canvasW - 120;
+    const canvasH = diagramBottom + 70;
+
+    return {
+      nodes, links, ticks, bands, bandLabels, captions,
+      canvasW, canvasH, legendTop, legendW,
+      emblemX: emblemCx - 215, emblemY: emblemCy - 215,
+      deusX: emblemCx - 150, deusY: emblemCy + 215
+    };
+}
+
+(function () {
+  var esc = function (s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  };
+
+  var v = renderVals({});
+
+  var emblem =
+    '<svg width="430" height="430" viewBox="-210 -210 420 420" style="position:absolute;left:' + v.emblemX + 'px;top:' + v.emblemY + 'px">' +
+      '<circle cx="0" cy="0" r="188" fill="none" stroke="#b0392f" stroke-width="30" stroke-dasharray="1.6 26" opacity="0.3"></circle>' +
+      '<g fill="none">' +
+        [['#ffffff', 34], ['#b0392f', 15], ['#ffffff', 4]].map(function (pass) {
+          return [0, 120, 240].map(function (rot) {
+            return '<path transform="rotate(' + rot + ')" d="M 0 46.95 A 130 130 0 0 1 0 -146.95 A 130 130 0 0 1 0 46.95 Z" stroke="' + pass[0] + '" stroke-width="' + pass[1] + '"></path>';
+          }).join('');
+        }).join('') +
+      '</g>' +
+    '</svg>';
+
+  var svg =
+    '<svg width="' + v.canvasW + '" height="' + v.canvasH + '" viewBox="0 0 ' + v.canvasW + ' ' + v.canvasH + '" style="position:absolute;left:0;top:0;fill:#F6F3ED">' +
+      v.bands.map(function (b) {
+        return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="' + b.fill + '"></rect>';
+      }).join('') +
+      v.links.map(function (l) {
+        return '<path d="' + l.d + '" fill="none" stroke="' + l.stroke + '" stroke-width="' + l.w + '" stroke-dasharray="' + l.dash + '" opacity="' + l.op + '"></path>';
+      }).join('') +
+      v.ticks.map(function (t) {
+        return '<line x1="' + t.x + '" y1="' + t.y1 + '" x2="' + t.x + '" y2="' + t.y2 + '" stroke="#24211e" stroke-width="1" opacity="0.06"></line>';
+      }).join('') +
+    '</svg>';
+
+  var bandLabels = v.bandLabels.map(function (bl) {
+    return '<div style="position:absolute;left:' + bl.x + 'px;top:' + bl.y + 'px;font-family:\'JetBrains Mono\',monospace;font-size:15px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(36,33,30,0.42)">' + esc(bl.text) + '</div>';
+  }).join('');
+
+  var deus =
+    '<div style="position:absolute;left:' + v.deusX + 'px;top:' + v.deusY + 'px;width:300px;text-align:center;font-size:34px;font-weight:600;color:#b0392f;letter-spacing:0.02em">Deus unus et trinus</div>';
+
+  var nodes = v.nodes.map(function (n) {
+    return '<div style="position:absolute;width:234px;left:' + n.lx + 'px;top:' + n.ly + 'px;box-sizing:border-box;padding:11px 13px 10px;background:' + n.bg + ';border:' + n.borderWidth + 'px ' + n.borderStyle + ' ' + n.color + ';border-radius:3px;box-shadow:' + n.shadow + '">' +
+      '<div style="font-size:27px;line-height:1.08;font-weight:600;color:' + n.color + ';text-wrap:pretty">' + esc(n.label) + '</div>' +
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:14px;line-height:1.3;color:' + n.subColor + ';margin-top:6px">' + esc(n.locus) + '</div>' +
+      '<div style="font-family:\'JetBrains Mono\',monospace;font-size:14px;line-height:1.3;color:' + n.routeColor + ';margin-top:1px">' + esc(n.route) + '</div>' +
+    '</div>';
+  }).join('');
+
+  var captions = v.captions.map(function (c) {
+    return '<div style="position:absolute;left:' + c.x + 'px;top:' + c.y + 'px;width:230px;font-size:17px;font-style:italic;line-height:1.3;color:#7d2a24;text-align:center">' + esc(c.text) + '</div>';
+  }).join('');
+
+  // The canvas is laid out on a 4004x2904 grid, but the drawing does not fill
+  // it: there is dead margin top and bottom. Crop to what is actually painted
+  // (plus PAD) so the frame has no band of white above and below the diagram.
+  var PAD = 24;
+  var xs = [], ys = [];
+  var box = function (x, y, w, h) { xs.push(x, x + w); ys.push(y, y + h); };
+  v.nodes.forEach(function (n) { box(n.lx, n.ly, 234, n.h); });
+  v.bands.forEach(function (b) { box(b.x, b.y, b.w, b.h); });
+  v.bandLabels.forEach(function (b) { box(b.x, b.y, 220, 20); });
+  v.captions.forEach(function (c) { box(c.x, c.y, 230, 40); });
+  v.ticks.forEach(function (t) { box(t.x, t.y1, 0, t.y2 - t.y1); });
+  v.links.forEach(function (l) {
+    // every path is M/L/Q, so the numbers alternate x, y
+    var nums = l.d.match(/-?\d+(?:\.\d+)?/g) || [];
+    for (var i = 0; i + 1 < nums.length; i += 2) box(+nums[i], +nums[i + 1], 0, 0);
+  });
+  box(v.emblemX, v.emblemY, 430, 430);
+  box(v.deusX, v.deusY, 300, 45);
+  var cropL = Math.min.apply(null, xs) - PAD, cropT = Math.min.apply(null, ys) - PAD;
+  var cropW = Math.max.apply(null, xs) + PAD - cropL, cropH = Math.max.apply(null, ys) + PAD - cropT;
+
+  var canvas = document.getElementById('dc-canvas');
+  canvas.style.cssText =
+    'position:relative;width:' + cropW + 'px;height:' + cropH + 'px;background:#ffffff;' +
+    "font-family:'EB Garamond',Georgia,serif;color:#24211e;overflow:hidden;transform-origin:center center";
+  canvas.innerHTML =
+    '<div style="position:absolute;left:' + (-cropL) + 'px;top:' + (-cropT) + 'px;width:' + v.canvasW + 'px;height:' + v.canvasH + 'px">' +
+    svg + bandLabels + emblem + deus + nodes + captions + '</div>';
+
+  function fit() {
+    // the viewport box, not window.inner*: inside an embed the window can report
+    // a height that has nothing to do with the box the page is painted into, and
+    // a width-only fit clips the lower row off the bottom.
+    var de = document.documentElement;
+    var w = de.clientWidth || window.innerWidth || 0;
+    var h = de.clientHeight || window.innerHeight || 0;
+    if (!w || !h) return;
+    canvas.style.transform = 'scale(' + Math.min(w / cropW, h / cropH) + ')';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+})();
+</script>
+</body>
+</html>

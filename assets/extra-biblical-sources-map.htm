@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #eceff4; }
+  #dc-fit { width: 100%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+  #dc-canvas { flex: none; transform-origin: center center; }
+</style>
+</helmet>
+
+<div id="dc-fit"><div id="dc-canvas" style="width: 1641px; height: 1024px; background: #eceff4; font-family: 'Manrope',sans-serif; padding: 44px; display: flex; flex-direction: column">
+
+  <!-- Header -->
+  <div style="flex:none; display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:26px;">
+    <div style="max-width:980px;">
+      <div style="font-size:13px; font-weight:700; letter-spacing:3px; color:#8a93a3; text-transform:uppercase;">A Map of Extra-Biblical Testimony</div>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:44px; font-weight:600; color:#161b24; line-height:1.05; margin-top:8px; letter-spacing:-0.5px;">Witnesses to a Spreading Faith</div>
+      
+    </div><div style="font-size:16px; color:#5a6373; line-height:1.45; margin-top:11px; max-width:920px;">It's often claimed there's no evidence for Jesus outside the Bible and early Christian writings, but many non-Christian historians and critics mention him. This chart shows each author, the period they were describing (e.g. Tacitus' <em>Annals</em>), and when they wrote. Marker colour indicates the writer's stance toward Christianity.&nbsp; The chart mostly focuses on secular sources, but over the following three centuries Christian writers produced thousands of letters and commentaries, so extensive that the whole New Testament can be reconstructed four times over from their quotations alone</div>
+
+  </div>
+
+  <!-- Body -->
+  <div style="flex:1; display:flex; gap:30px; min-height:0;">
+
+    <!-- Map card -->
+    <div style="width:1059px; height:800px; flex:none; position:relative; border-radius:18px; overflow:hidden; box-shadow:0 18px 44px rgba(22,27,36,.16), 0 2px 8px rgba(22,27,36,.08); background:#cfe6f0;">
+      <img src="../assets/assets/map-modern.png" alt="Map of early Christianity" style="display:block; width:1059px; height:800px;">
+
+      <!-- Combined legend (covers the map's printed legend) -->
+      <div style="position:absolute; left:12px; bottom:12px; width:294px; background:#ffffff; border-radius:13px; box-shadow:0 10px 26px rgba(22,27,36,.18), 0 1px 4px rgba(22,27,36,.10); padding:15px 17px 16px; z-index:6;">
+        <div style="font-size:10.5px; font-weight:700; letter-spacing:2px; color:#9aa2b1; text-transform:uppercase;">Christian Expansion</div>
+        <div style="display:flex; flex-direction:column; gap:7px; margin-top:9px;">
+          <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#3a424f; font-weight:500;"><span style="width:15px; height:15px; border-radius:3px; background:#047a9f; flex:none;"></span>Christian areas, ca. 300</div>
+          <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#3a424f; font-weight:500;"><span style="width:15px; height:15px; border-radius:3px; background:#69c9bb; flex:none;"></span>Christianized, 300–600</div>
+          <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#3a424f; font-weight:500;"><span style="width:15px; height:15px; border-radius:3px; background:#e2ee98; border:1px solid #cdd6a3; flex:none;"></span>Christianized, 600–800</div>
+          <div style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#3a424f; font-weight:500;"><span style="width:15px; display:flex; justify-content:center; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:#1b212b;"></span></span>Centers of diffusion</div>
+        </div>
+        <div style="height:1px; background:#eef0f4; margin:13px 0 12px;"></div>
+        <div style="font-size:10.5px; font-weight:700; letter-spacing:2px; color:#9aa2b1; text-transform:uppercase;">Writer's Stance</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:9px;">
+          <div style="display:flex; align-items:center; gap:7px; font-size:12.5px; color:#3a424f; font-weight:600;"><span style="width:12px; height:12px; border-radius:50%; background:#d6453f; flex:none;"></span>Hostile</div>
+          <div style="display:flex; align-items:center; gap:7px; font-size:12.5px; color:#3a424f; font-weight:600;"><span style="width:12px; height:12px; border-radius:50%; background:#4f6bed; flex:none;"></span>Neutral</div>
+          <div style="display:flex; align-items:center; gap:7px; font-size:12.5px; color:#3a424f; font-weight:600;"><span style="width:12px; height:12px; border-radius:50%; background:#1f9d6b; flex:none;"></span>Official</div>
+          <div style="display:flex; align-items:center; gap:7px; font-size:12.5px; color:#3a424f; font-weight:600;"><span style="width:12px; height:12px; border-radius:50%; background:#e0922f; flex:none;"></span>Critical</div>
+          <div style="display:flex; align-items:center; gap:7px; font-size:12.5px; color:#3a424f; font-weight:600;"><span style="width:12px; height:12px; border-radius:50%; background:#5a6573; flex:none;"></span>Mixed (Rome)</div>
+        </div>
+      </div>
+
+      <!-- Rome cluster -->
+      <div style="position:absolute; left:38.3%; top:54.8%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:5;">
+        <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.94); padding:5px 13px 5px 5px; border-radius:999px; box-shadow:0 5px 14px rgba(22,27,36,.22); border:1px solid rgba(22,27,36,.06);">
+          <span style="width:28px; height:28px; border-radius:50%; background:#5a6573; color:#fff; font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">8</span>
+          <span style="font-weight:700; font-size:13px; letter-spacing:1.5px; color:#2a313d;">ROME</span>
+        </div>
+        <div style="display:flex; gap:5px; margin-top:6px; background:rgba(255,255,255,.92); padding:3px 9px; border-radius:999px; box-shadow:0 3px 9px rgba(22,27,36,.16); font-size:11px; font-weight:700; font-family:'Space Grotesk',sans-serif;">
+          <span style="color:#d6453f;">1</span><span style="color:#1f9d6b;">3</span><span style="color:#4f6bed;">4</span><span style="color:#4f6bed;">5</span><span style="color:#d6453f;">6</span><span style="color:#d6453f;">7</span><span style="color:#e0922f;">14</span><span style="color:#d6453f;">15</span>
+        </div>
+      </div>
+
+      <!-- 2 Pliny -->
+      <div style="position:absolute; left:68.5%; top:56.3%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">2</span>
+        <span style="font-size:11px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 9px; border-radius:999px; margin-top:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">c. AD 112</span>
+      </div>
+
+      <!-- 11 Phlegon -->
+      <div style="position:absolute; left:65.8%; top:65.6%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#4f6bed; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">11</span>
+        <span style="font-size:11px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 9px; border-radius:999px; margin-top:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">AD 32–33</span>
+      </div>
+
+      <!-- 9 Lucian -->
+      <div style="position:absolute; left:85.2%; top:63.3%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">9</span>
+        <span style="font-size:11px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 9px; border-radius:999px; margin-top:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">c. AD 30</span>
+      </div>
+
+      <!-- 8 Mara -->
+      <div style="position:absolute; left:82.5%; top:70.2%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#4f6bed; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">8</span>
+        <span style="font-size:11px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 9px; border-radius:999px; margin-top:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">AD 30 / 70</span>
+      </div>
+
+      <!-- 10 Thallus -->
+      <div style="position:absolute; left:53.4%; top:78%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">10</span>
+        <span style="font-size:11px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 9px; border-radius:999px; margin-top:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">c. AD 30</span>
+      </div>
+
+      <!-- 13 Celsus (label above) -->
+      <div style="position:absolute; left:68.3%; top:83%; transform:translate(-50%,-50%); display:flex; flex-direction:column-reverse; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">13</span>
+        <span style="font-size:11px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 9px; border-radius:999px; margin-bottom:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">c. AD 30</span>
+      </div>
+
+      <!-- 12 Talmud (off-map east) -->
+      <div style="position:absolute; left:96.8%; top:63.3%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; z-index:4;">
+        <span style="width:32px; height:32px; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; box-shadow:0 0 0 3px #fff, 0 6px 13px rgba(22,27,36,.24);">12</span>
+        <span style="font-size:10px; color:#1f2733; background:rgba(255,255,255,.92); padding:2px 8px; border-radius:999px; margin-top:5px; font-weight:600; white-space:nowrap; box-shadow:0 2px 6px rgba(22,27,36,.14);">Babylonia ▸</span>
+      </div>
+
+    </div>
+
+    <!-- Source panel -->
+    <div style="flex: 1; min-width: 0; background: #ffffff; border-radius: 18px; box-shadow: 0 18px 44px rgba(22,27,36,.10), 0 2px 8px rgba(22,27,36,.05); padding: 26px 28px; display: flex; flex-direction: column; width: 439px; height: 802px">
+      <div style="font-size:12px; font-weight:700; letter-spacing:2.5px; color:#9aa2b1; text-transform:uppercase;">The Sources</div>
+
+      <!-- Rome group -->
+      <div style="display:flex; align-items:center; gap:9px; margin-top:16px; margin-bottom:9px;">
+        <span style="width:22px; height:22px; border-radius:50%; background:#5a6573; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">8</span>
+        <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:#1b212b; letter-spacing:.3px;">ROME</span>
+        <span style="font-size:12.5px; color:#9aa2b1;">· imperial capital · mixed stances</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:1px;">
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">1</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Tacitus</b> · <i>Annals</i> 15.44 — <b>AD 64</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 115–117</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#1f9d6b; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">3</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Trajan</b> · <i>Epistles</i> 10.97 — <b>AD 112</b> <i style="color:#9aa2b1; font-weight:500;">· written AD 112</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#4f6bed; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">4</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Josephus</b> · <i>Antiquities</i> 20.200 — <b>AD 62</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 93–94</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#4f6bed; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">5</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Josephus</b> · <i>Antiquities</i> 18.63 — <b>AD 30–33</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 93–94</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">6</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Suetonius</b> · <i>Claudius</i> 25.4 — <b>AD 49</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 121</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">7</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Suetonius</b> · <i>Nero</i> 16.2 — <b>AD 64</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 121</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#e0922f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">14</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Galen</b> · on Plato's <i>Republic</i> — <b>2nd c.</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 180</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:6px 0;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">15</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Alexamenos graffito</b> · Palatine — <b>c. AD 30</b> <i style="color:#9aa2b1; font-weight:500;">· physical artifact, made c. AD 200 (disputed)</i></span></div>
+      </div>
+
+      <!-- Empire group -->
+      <div style="display:flex; align-items:center; gap:9px; margin-top:16px; margin-bottom:4px;">
+        <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; color:#1b212b; letter-spacing:.3px;">ELSEWHERE &amp; BEYOND</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column;">
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">2</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Pliny the Younger</b> · <i>Bithynia-Pontus</i> — <b>c. AD 112</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 110–112</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#4f6bed; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">11</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Phlegon of Tralles</b> · <i>Tralles</i> — <b>AD 32–33</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 137–140</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">9</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Lucian</b> · <i>Samosata, Syria</i> — <b>c. AD 30</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 165</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#4f6bed; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">8</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Mara bar Serapion</b> · <i>Syria</i> — <b>AD 30 &amp; 70</b> <i style="color:#9aa2b1; font-weight:500;">· written disputed, c. AD 73–3rd c.</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">10</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Thallus</b> · <i>E. Mediterranean</i> — <b>c. AD 30</b> <i style="color:#9aa2b1; font-weight:500;">· written disputed, perhaps c. AD 50s</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">13</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Celsus</b> · <i>Alexandria / Greek East</i> — <b>c. AD 30</b> <i style="color:#9aa2b1; font-weight:500;">· written c. AD 175–178</i></span></div>
+        <div style="display:flex; align-items:center; gap:11px; padding:8px 0; border-top:1px solid #eef0f4;"><span style="width:23px; height:23px; flex:none; border-radius:50%; background:#d6453f; color:#fff; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif;">12</span><span style="font-size:13.5px; color:#3a424f;"><b style="color:#1b212b;">Babylonian Talmud</b> · <i>Babylonia (off map)</i> — <b>c. AD 30</b> <i style="color:#9aa2b1; font-weight:500;">· redacted c. AD 500</i></span></div>
+      </div>
+
+      <div style="margin-top:auto; padding-top:16px; font-size:11.5px; color:#9aa2b1; line-height:1.45;"><br></div>
+    </div>
+
+  </div>
+</div>
+</div>
+<script>
+  (function () {
+    var W = 1641, H = 1024;
+    function fit() {
+      var canvas = document.getElementById('dc-canvas');
+      if (!canvas) return;
+      // the viewport box, not window.inner*: inside an embed the window can
+      // report a height unrelated to the box the page is painted into.
+      var de = document.documentElement;
+      var w = de.clientWidth || window.innerWidth || 0;
+      var h = de.clientHeight || window.innerHeight || 0;
+      if (!w || !h) return;
+      canvas.style.transform = 'scale(' + Math.min(w / W, h / H) + ')';
+    }
+    fit();
+    document.addEventListener('DOMContentLoaded', fit);
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+  })();
+</script>
+</x-dc>
+</body>
+</html>
